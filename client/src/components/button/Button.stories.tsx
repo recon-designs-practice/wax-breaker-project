@@ -14,7 +14,7 @@ import Button from "../button/Button"
 export const Primary: StoryObj<typeof Button> = {
   render: (args) => <Button {...args} />,
   args: {
-    label: "Primary",
+    label: "Primary"
   },
 }
 
@@ -38,6 +38,9 @@ const meta: Meta<typeof Button> = {
   component: Button,
   argTypes: {
     buttonType: {
+      control: { type: "select" },
+    },
+    type: {
       control: { type: "select" },
     },
   },
