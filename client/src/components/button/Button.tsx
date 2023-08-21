@@ -1,3 +1,10 @@
+import styled from '@emotion/styled'
+
+const ButtonComponent = styled.button`
+  color: white;
+  background: dodgerblue;
+`
+
 type Props = {
   /**
    * This is a description of the label prop.
@@ -10,9 +17,8 @@ type Props = {
 }
 
 export default function Button({ label = 'Button', buttonType = 'primary' }: Props) {
-  console.log(555, buttonType)
 
   return (
-    <button>{label}</button>
+    <ButtonComponent>{label}</ButtonComponent>
   )
 }
