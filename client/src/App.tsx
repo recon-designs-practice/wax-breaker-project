@@ -1,9 +1,10 @@
-import React from "react"
+import Button from "./components/button/Button"
 
 function App() {
   return (
     <div>
       <h1>Hello world</h1>
+      <Button label="Labels" buttonType="primary" />
     </div>
   )
 }
