@@ -13,6 +13,12 @@ const config: StorybookConfig = {
     name: "@storybook/react-webpack5",
     options: {},
   },
+  refs: {
+    'components': {
+      title: 'Be-Ubiquitous',
+      url: 'http://localhost:6006/'
+    }
+  },
   docs: {
     autodocs: true,
     defaultName: 'Docs'
