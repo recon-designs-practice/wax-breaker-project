@@ -16,7 +16,7 @@ const config: StorybookConfig = {
   refs: {
     'components': {
       title: 'Be-Ubiquitous',
-      url: 'http://localhost:6006/'
+      url: 'http://localhost:6002/'
     }
   },
   docs: {
