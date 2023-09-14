@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 
 const ButtonComponent = styled.button`
   color: white;
-  background: dodgerblue;
+  background: ${props => props.theme.colors.accent};
 `
 
 type Props = {
@@ -24,7 +24,6 @@ export default function Button({
   buttonType = "primary",
   ...otherProps
 }: ButtonProps) {
-  // console.log(buttonType)
 
   return <ButtonComponent {...otherProps}>{label}</ButtonComponent>
 }
