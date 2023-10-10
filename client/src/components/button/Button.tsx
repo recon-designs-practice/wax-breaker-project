@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 
 const ButtonComponent = styled.button`
   color: white;
-  background: ${props => props.theme.colors.accent};
+  background: red;
 `
 
 type Props = {
