@@ -8,25 +8,32 @@ import {
 } from "@storybook/blocks"
 import Button from "../button/Button"
 
-/**
- * Here is a description for the `Primary` story.
- */
-export const Primary: StoryObj<typeof Button> = {
-  render: (args) => <Button {...args} />,
-  args: {
-    label: "Primary"
-  },
+const ButtonStoryTemplate: StoryObj<typeof Button> = {
+  render: (args) => <Button {...args} />
 }
 
 /**
- * Here is a description for the `Secondary` story.
+ * Here is a description for the `Default` story.
  */
-export const Secondary: StoryObj<typeof Button> = {
-  render: (args) => <Button {...args} />,
+export const Default: StoryObj<typeof Button> = {
+  ...ButtonStoryTemplate,
   args: {
-    label: "Secondary",
-    buttonType: "secondary",
-  },
+    label: 'Label',
+    onClick: () => alert('Button clicked.')
+  }
+}
+
+/**
+ * Here is a description for the `Type` story.
+ */
+export const Type: StoryObj<typeof Button> = {
+  name: 'Button Type',
+  ...ButtonStoryTemplate,
+  args: {
+    label: 'Label',
+    type: 'button',
+    onClick: () => alert('Button clicked.')
+  }
 }
 
 /**
@@ -37,12 +44,9 @@ const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
   argTypes: {
-    buttonType: {
-      control: { type: "select" },
-    },
     type: {
-      control: { type: "select" },
-    },
+      control: { type: "select"  },
+    }
   },
   parameters: {
     docs: {
@@ -50,7 +54,7 @@ const meta: Meta<typeof Button> = {
         <div>
           <Title />
           <Description />
-          <Canvas of={Primary} sourceState="hidden" />
+          <Canvas of={Default} sourceState="hidden" />
           <ArgTypes />
           <Stories />
         </div>
