@@ -10,6 +10,17 @@ const getAllUsers = async (req, res) => {
   }
 }
 
+const getUserById = async (req, res) => {
+  const { id } = req.params
+
+  const selectedUser = await pool.query(
+    'SELECT * FROM users WHERE user_id = $1;',
+    [id]
+  )
+
+  res.json(selectedUser.rows[0])
+}
+
 const createNewUser = async (req, res) => {
   const { first_name, last_name } = req.body
 
@@ -35,5 +46,6 @@ const deleteUserById = async (req, res) => {
 module.exports = {
   getAllUsers,
   createNewUser,
-  deleteUserById
+  deleteUserById,
+  getUserById
 }

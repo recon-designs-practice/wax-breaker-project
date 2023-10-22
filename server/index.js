@@ -18,6 +18,7 @@ app.delete('/box_breaks/:id', breaksRoutes.deleteBreakById)
 
 // users routes
 app.get('/users', usersRoutes.getAllUsers)
+app.get('/users/:id', usersRoutes.getUserById)
 app.post('/users', usersRoutes.createNewUser)
 app.delete('/users/:id', usersRoutes.deleteUserById)
 
