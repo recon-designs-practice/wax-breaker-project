@@ -6,4 +6,4 @@ CREATE TABLE box_break(
   break_name VARCHAR(255)
 );
 
-INSERT INTO box_break (break_date, break_name) VALUES ('1922-02-02', 'First break name');
+INSERT INTO box_break (break_date, break_name) VALUES ('1974-12-22', 'Second break name');
