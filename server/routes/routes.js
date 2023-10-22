@@ -1,4 +1,4 @@
-const pool = require('./db')
+const pool = require('../db')
 const moment = require('moment')
 
 const getAllBreaks = async (req, res) => {
