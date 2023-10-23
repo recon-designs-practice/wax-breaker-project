@@ -1,12 +1,35 @@
-import React from 'react'
+import React from "react"
+import axios from "axios"
 
-type Props = {
-  message: string
-}
+const api = "http://localhost:5656/box_breaks"
 
-const Dashboard = (props: Props) => {
+const Dashboard = () => {
+  const [listOfBreaks, setListOfBreaks] = React.useState([])
+
+  React.useEffect(() => {
+    axios
+      .get(api)
+      .then((response) => {
+        const tempArr: any = []
+
+        response.data.forEach((entry: any) => {
+          tempArr.push(entry)
+        })
+
+        setListOfBreaks(tempArr)
+      })
+      .catch((error) => {
+        console.log(222, error)
+      })
+  }, [])
+
   return (
-    <div>{props.message}</div>
+    <div>
+      <h1>Dashboard</h1>
+      {listOfBreaks.map((boxBreak: any, idx: number) => {
+        return <p key={idx}>{boxBreak.break_name}</p>
+      })}
+    </div>
   )
 }
 
