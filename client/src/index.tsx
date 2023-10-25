@@ -1,11 +1,18 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import App from "./App"
+// @ts-expect-error
+import { ThemeProvider } from "@emotion/react"
+import { BreaksProvider } from "./contexts/BreaksContext"
+import Dashboard from "./pages/Dashboard"
 import ErrorPage from "./error-page"
 import Signin from "./pages/Signin"
-import Dashboard from "./pages/Dashboard"
-import { BreaksProvider } from "./contexts/BreaksContext"
+
+const theme = {
+  color: {
+    primary: 'purple'
+  }
+}
 
 const router = createBrowserRouter([
   {
@@ -16,11 +23,7 @@ const router = createBrowserRouter([
   {
     path: "/sign-in",
     element: <Signin message="This is the sign in page." />,
-  },
-  // {
-  //   path: "/dashboard",
-  //   element: <Dashboard />,
-  // },
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
@@ -28,7 +31,9 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <BreaksProvider>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </BreaksProvider>
   </React.StrictMode>
 )
