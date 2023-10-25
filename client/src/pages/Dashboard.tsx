@@ -1,10 +1,10 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import axios from "axios"
 import styled from "@emotion/styled"
-import Card from "../components/card/Card"
-import { Button, Input } from "be-ubiquitous"
 import moment from "moment"
+import { Button, Input } from "be-ubiquitous"
 import { BreaksContext } from "../contexts/BreaksContext"
+import Card from "../components/card/Card"
 import Header from "../components/header/Header"
 import Modal from "../components/modal/Modal"
 
@@ -18,6 +18,23 @@ const Dashboard = () => {
   const [allBreaks, setAllBreaks] = useContext(BreaksContext)
   const [isModalShowing, setIsModalShowing] = useState(false)
   const [newBreakName, setNewBreakName] = useState('')
+
+  useEffect(() => {
+    const closeModal = (e: any) => {
+      if (e.keyCode === 27) {
+        if (!isModalShowing) return
+
+        if (isModalShowing) {
+          setIsModalShowing(prevState => !prevState)
+          setNewBreakName('')
+        }
+      }
+    }
+
+    window.addEventListener('keydown', closeModal)
+
+    return () => window.removeEventListener('keydown', closeModal)
+  })
 
   const deleteBreak = (breakId: string, api: string) => {
     axios
@@ -98,7 +115,8 @@ const Dashboard = () => {
             textAlign: "center",
           }}
         >
-          16 breaks
+          {/** @ts-expect-error */}
+          {`${allBreaks.length} breaks`}
         </h4>
         <Button
           label="New break"
