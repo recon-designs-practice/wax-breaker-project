@@ -2,11 +2,11 @@ import Header from './components/header/Header'
 
 const links = [
   { 
-    linkText: 'Link 1', 
+    linkText: 'Sign in', 
     path: 'sign-in' 
   },
   { 
-    linkText: 'Link 2', 
+    linkText: 'Dashboard', 
     path: 'dashboard' 
   }
 ]
