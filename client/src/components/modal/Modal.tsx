@@ -9,7 +9,6 @@ const ModalComponent = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
-  // border: 2px solid hotpink;
 `
 
 export type ModalProps = {
