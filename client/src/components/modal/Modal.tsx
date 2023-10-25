@@ -1,16 +1,29 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import ModalOverlay from './ModalOverlay'
+import ModalContainer from './ModalContainer'
 
-const ModalContainer = styled.div`
-  border: 2px solid hotpink;
+const ModalComponent = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  // border: 2px solid hotpink;
 `
 
 export type ModalProps = {
-  msg?: string
+  children: React.ReactElement | React.ReactElement[]
 }
 
-export default function Modal({ msg }: ModalProps) {
+export default function Modal({ children }: ModalProps) {
   return (
-    <ModalContainer>{msg}</ModalContainer>
+    <ModalComponent>
+      <ModalOverlay>
+        <ModalContainer>
+          {children}
+        </ModalContainer>
+      </ModalOverlay>
+    </ModalComponent>
   )
 }
