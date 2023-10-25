@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import Card from "../components/card/Card"
+import moment from 'moment'
 
 const api = "http://localhost:5656/box_breaks"
 
@@ -35,7 +36,8 @@ const Dashboard = () => {
         }}
       >
         {listOfBreaks.map((boxBreak: any, idx: number) => {
-          console.log(boxBreak)
+          const breakDate = moment(boxBreak.break_date).format('MMMM Do YYYY, h:mm:ss')
+
           return (
             <Card
               key={idx}
@@ -44,7 +46,7 @@ const Dashboard = () => {
               }}
             >
               <h3>{boxBreak.break_name}</h3>
-              <p>{boxBreak.break_date}</p>
+              <p>{breakDate}</p>
             </Card>
           )
         })}
