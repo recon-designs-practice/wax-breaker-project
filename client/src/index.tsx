@@ -5,12 +5,13 @@ import App from "./App"
 import ErrorPage from "./error-page"
 import Signin from "./pages/Signin"
 import Dashboard from "./pages/Dashboard"
+import { BreaksProvider } from "./contexts/BreaksContext"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
   },
   {
     path: "/sign-in",
@@ -26,6 +27,8 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BreaksProvider>
+      <RouterProvider router={router} />
+    </BreaksProvider>
   </React.StrictMode>
 )
