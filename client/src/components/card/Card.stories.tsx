@@ -10,14 +10,11 @@ export const Default: StoryObj<typeof Card> = {
   args: {
     children: (
       <>
-        <div style={{ border: '1px dashed hotpink' }}>
-          <h2>Card title</h2>
+        <div>
+          <h2 style={{ margin: '0px' }}>Card title</h2>
         </div>
-        <div style={{ border: '1px dashed hotpink' }}>
-          <p>Card body</p>
-        </div>
-        <div style={{ border: '1px dashed hotpink' }}>
-          <p>Card footer</p>
+        <div>
+          <p style={{ margin: '4px 0px 0px 0px' }}>Card body</p>
         </div>
       </>
     ),
@@ -27,6 +24,25 @@ export const Default: StoryObj<typeof Card> = {
 const meta: Meta<typeof Card> = {
   title: "Components/Card",
   component: Card,
+  decorators: [
+    (CardStory) => (
+      <div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(12, 1fr)",
+            gap: "20px",
+          }}
+        >
+          <div style={{
+            gridColumn: 'span 3'
+          }}>
+            <CardStory />
+          </div>
+        </div>
+      </div>
+    ),
+  ],
 }
 
 export default meta
