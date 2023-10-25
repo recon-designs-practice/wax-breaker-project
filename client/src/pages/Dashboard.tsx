@@ -1,9 +1,10 @@
-import React from "react"
+import { useContext } from "react"
 import axios from "axios"
 import styled from "@emotion/styled"
 import Card from "../components/card/Card"
 import { Button } from "be-ubiquitous"
 import moment from "moment"
+import { BreaksContext } from "../contexts/BreaksContext"
 
 const api = "http://localhost:5656/box_breaks"
 
@@ -12,24 +13,7 @@ const StyledButton = styled(Button)`
 `
 
 const Dashboard = () => {
-  const [listOfBreaks, setListOfBreaks] = React.useState([])
-
-  React.useEffect(() => {
-    axios
-      .get(api)
-      .then((response) => {
-        const tempArr: any = []
-
-        response.data.forEach((entry: any) => {
-          tempArr.push(entry)
-        })
-
-        setListOfBreaks(tempArr)
-      })
-      .catch((error) => {
-        console.log(222, error)
-      })
-  }, [])
+  const [allBreaks, setAllBreaks] = useContext(BreaksContext)
 
   const deleteBreak = (breakId: any) => {
     axios
@@ -45,8 +29,8 @@ const Dashboard = () => {
           response.data.forEach((entry: any) => {
             tempArr.push(entry)
           })
-  
-          setListOfBreaks(tempArr)
+          // @ts-expect-error
+          setAllBreaks(tempArr)
         })
         .catch((error) => {
           console.log(222, error)
@@ -67,7 +51,8 @@ const Dashboard = () => {
           gap: "20px",
         }}
       >
-        {listOfBreaks.map((boxBreak: any, idx: number) => {
+        {/** @ts-expect-error */}
+        {allBreaks.map((boxBreak: any, idx: number) => {
           const breakDate = moment(boxBreak.break_date).format(
             "MMMM Do YYYY, h:mm:ss"
           )
