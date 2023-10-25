@@ -10,17 +10,17 @@ import { BreaksProvider } from "./contexts/BreaksContext"
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Dashboard />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/sign-in",
     element: <Signin message="This is the sign in page." />,
   },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
+  // {
+  //   path: "/dashboard",
+  //   element: <Dashboard />,
+  // },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)

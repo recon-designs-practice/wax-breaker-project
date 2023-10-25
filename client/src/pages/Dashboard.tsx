@@ -5,6 +5,7 @@ import Card from "../components/card/Card"
 import { Button } from "be-ubiquitous"
 import moment from "moment"
 import { BreaksContext } from "../contexts/BreaksContext"
+import Header from "../components/header/Header"
 
 const api = "http://localhost:5656/box_breaks"
 
@@ -22,19 +23,19 @@ const Dashboard = () => {
         console.log(response.data)
 
         axios
-        .get(api)
-        .then((response) => {
-          const tempArr: any = []
-  
-          response.data.forEach((entry: any) => {
-            tempArr.push(entry)
+          .get(api)
+          .then((response) => {
+            const tempArr: any = []
+
+            response.data.forEach((entry: any) => {
+              tempArr.push(entry)
+            })
+            // @ts-expect-error
+            setAllBreaks(tempArr)
           })
-          // @ts-expect-error
-          setAllBreaks(tempArr)
-        })
-        .catch((error) => {
-          console.log(222, error)
-        })
+          .catch((error) => {
+            console.log(222, error)
+          })
       })
       .catch((error) => {
         console.log(222, error)
@@ -43,9 +44,27 @@ const Dashboard = () => {
 
   return (
     <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
-      <h1>Dashboard</h1>
+      <Header>
+        <h1 style={{ margin: "0px", gridColumn: "span 6" }}>Title here</h1>
+        <h4
+          style={{
+            margin: "0px",
+            paddingTop: "8px",
+            gridColumn: "7 / 9",
+            textAlign: "center",
+          }}
+        >
+          16 breaks
+        </h4>
+        <Button
+          label="Add break"
+          style={{ gridColumn: "12 / 15" }}
+          onClick={() => alert("Add break button clicked.")}
+        />
+      </Header>
       <div
         style={{
+          paddingTop: "40px",
           display: "grid",
           gridTemplateColumns: "repeat(12, 1fr)",
           gap: "20px",

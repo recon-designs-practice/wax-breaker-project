@@ -1,41 +1,19 @@
 import React from "react"
-import { Outlet, Link } from "react-router-dom"
+import styled from "@emotion/styled"
 
-type HeaderLink = {
-  linkText: string
-  path: string
-}
+const HeaderComponent = styled.header`
+  display: grid;
+  grid-template-columns: 20px repeat(12, 1fr) 20px;
+`
 
 type HeaderProps = {
-  /**
-   * That that will be rendered as the title of the app. In place of where a logo would be.
-   */
-  title?: string
-  /**
-   * Accepts an array of objects with the text and path for the link.
-   */
-  links?: HeaderLink[]
+  children?: React.ReactElement | React.ReactElement[]
 }
 
-export default function Header({ title, links }: HeaderProps) {
+export default function Header({ children }: HeaderProps) {
   return (
-    <>
-      <div id="fakeHeader" style={{ border: "2px solid green" }}>
-        <h1>{title}</h1>
-        <nav>
-          <ul>
-            {links && links.map(link => (
-              <li>
-                <Link to={link.path}>{link.linkText}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-
-      <div id="detail">
-        <Outlet />
-      </div>
-    </>
+    <HeaderComponent>
+      {children}
+    </HeaderComponent>
   )
 }
