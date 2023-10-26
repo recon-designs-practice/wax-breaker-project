@@ -1,7 +1,9 @@
 declare module '@emotion/react' {
     export interface Theme {
       color : {
-        primary: string;
+        surfacePrimary: string;
+        onPrimary: string;
+        accentPrimary: string
       };
     }
   }

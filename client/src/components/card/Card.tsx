@@ -10,20 +10,14 @@ type Props = {
 
 const CardContainer = styled.div<Props>(
   {
-    border: "2px solid black",
     borderRadius: "2px",
   },
   ({ noPadding }) => ({
     padding: noPadding ? "0px" : "12px",
   }),
   ({ theme }) => ({
-    /**
-     * TODO: Come back and fix this theme error. Everything works as expected, but TS ain't happy
-     * 
-     * // @ts-expect-error Property 'color' does not... WTF???
-     */
-    
-    background: theme.color.primary
+    border: `2px solid ${theme.color.onPrimary}`,
+    background: theme.color.surfacePrimary
   })
 )
 

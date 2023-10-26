@@ -1,6 +1,8 @@
 const defaultTheme = {
   color: {
-    primary: "lightgreen",
+    surfacePrimary: "#F9F9F9",
+    onPrimary: "#3F3F3F",
+    accentPrimary: "#235645"
   },
 }
 
