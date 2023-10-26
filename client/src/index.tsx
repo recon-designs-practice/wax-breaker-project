@@ -1,18 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-// @ts-expect-error
+// @ts-expect-error Module '"@emotion/react"' has no exported member 'ThemeProvider'.
 import { ThemeProvider } from "@emotion/react"
 import { BreaksProvider } from "./contexts/BreaksContext"
 import Dashboard from "./pages/Dashboard"
 import ErrorPage from "./error-page"
 import Signin from "./pages/Signin"
-
-const theme = {
-  color: {
-    primary: 'purple'
-  }
-}
+import defaultTheme from "./components/theme/defaultTheme"
 
 const router = createBrowserRouter([
   {
@@ -31,7 +26,7 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <BreaksProvider>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={defaultTheme}>
         <RouterProvider router={router} />
       </ThemeProvider>
     </BreaksProvider>

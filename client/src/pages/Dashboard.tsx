@@ -14,6 +14,18 @@ const StyledButton = styled(Button)`
   width: 100%;
 `
 
+const StyledH3 = styled('h3')(
+  ({ theme }) => ({
+    color: theme.color.onPrimary
+  })
+)
+
+const StyledP = styled('p')(
+  ({ theme }) => ({
+    color: theme.color.onPrimary
+  })
+)
+
 const Dashboard = () => {
   const [allBreaks, setAllBreaks] = useContext(BreaksContext)
   const [isModalShowing, setIsModalShowing] = useState(false)
@@ -48,7 +60,7 @@ const Dashboard = () => {
             response.data.forEach((entry: any) => {
               tempArr.push(entry)
             })
-            // @ts-expect-error
+            // @ts-expect-error  Type 'never' has no call signatures
             setAllBreaks(tempArr)
           })
           .catch((error) => {
@@ -73,7 +85,7 @@ const Dashboard = () => {
         response.data.forEach((entry: any) => {
           tempArr.push(entry)
         })
-        // @ts-expect-error
+        // @ts-expect-error  Type 'never' has no call signatures
         setAllBreaks(tempArr)
       })
       .catch((error) => {
@@ -115,7 +127,7 @@ const Dashboard = () => {
             textAlign: "center",
           }}
         >
-          {/** @ts-expect-error */}
+          {/** @ts-expect-error Property 'length' does not exist on type 'never'. */}
           {`${allBreaks.length} breaks`}
         </h4>
         <Button
@@ -132,7 +144,7 @@ const Dashboard = () => {
           gap: "20px",
         }}
       >
-        {/** @ts-expect-error */}
+        {/** @ts-expect-error Property 'map' does not exist on type 'never'. */}
         {allBreaks.map((boxBreak: any, idx: number) => {
           const breakDate = moment(boxBreak.break_date).format(
             "MMMM Do YYYY, h:mm:ss"
@@ -145,8 +157,8 @@ const Dashboard = () => {
                 gridColumn: "span 3",
               }}
             >
-              <h3>{boxBreak.break_name}</h3>
-              <p>{breakDate}</p>
+              <StyledH3>{boxBreak.break_name}</StyledH3>
+              <StyledP>{breakDate}</StyledP>
               <StyledButton
                 label="Button"
                 onClick={() => deleteBreak(boxBreak.box_break_id, api)}

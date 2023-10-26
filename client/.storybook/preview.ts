@@ -6,7 +6,9 @@ import { Title, Subtitle, Primary, ArgTypes, Stories } from "@storybook/blocks"
 
 const darkTheme = {
   color: {
-    primary: "darkgreen",
+    surfacePrimary: "darkgreen",
+    onPrimary: "red",
+    accentPrimary: "dodgerblue"
   },
 }
 
