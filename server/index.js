@@ -14,6 +14,7 @@ app.use(express.json())
 app.get('/box_breaks', breaksRoutes.getAllBreaks)
 app.post('/box_breaks', breaksRoutes.createNewBreak)
 app.get('/box_breaks/:id', breaksRoutes.getBreakById)
+app.put('/box_breaks/:id', breaksRoutes.updateBreakById)
 app.delete('/box_breaks/:id', breaksRoutes.deleteBreakById)
 
 // users routes
