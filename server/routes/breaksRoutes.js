@@ -42,6 +42,22 @@ const getBreakById = async (req, res) => {
   }
 }
 
+const updateBreakById = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { break_name } = req.body
+
+    await pool.query(
+      'UPDATE box_break SET break_name = $1 WHERE box_break_id = $2;',
+      [break_name, id]
+    )
+
+    res.json("Todo was updated")
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 const deleteBreakById = async (req, res) => {
   try {
     const { id } = req.params
@@ -61,5 +77,6 @@ module.exports = {
   getAllBreaks,
   createNewBreak,
   getBreakById,
-  deleteBreakById
+  deleteBreakById,
+  updateBreakById
 }
