@@ -1,9 +1,9 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 import styled from "@emotion/styled"
 import moment from "moment"
+import useBreaksStore from "../stores/store"
 import { Button, Input } from "be-ubiquitous"
-import { BreaksContext } from "../contexts/BreaksContext"
 import Card from "../components/card/Card"
 import Header from "../components/header/Header"
 import Modal from "../components/modal/Modal"
@@ -14,38 +14,55 @@ const StyledButton = styled(Button)`
   width: 100%;
 `
 
-const StyledH3 = styled('h3')(
-  ({ theme }) => ({
-    color: theme.color.onPrimary
-  })
-)
+const StyledH3 = styled("h3")(({ theme }) => ({
+  color: theme.color.onPrimary,
+}))
 
-const StyledP = styled('p')(
-  ({ theme }) => ({
-    color: theme.color.onPrimary
-  })
-)
+const StyledP = styled("p")(({ theme }) => ({
+  color: theme.color.onPrimary,
+}))
 
 const Dashboard = () => {
-  const [allBreaks, setAllBreaks] = useContext(BreaksContext)
-  const [isModalShowing, setIsModalShowing] = useState(false)
-  const [newBreakName, setNewBreakName] = useState('')
+  const [newBreakName, setNewBreakName] = useState("")
+  const breaks = useBreaksStore((state) => state.breaks)
+  const setBreaks = useBreaksStore((state) => state.setAllStoreBreaks)
+  const isNewBreakModalShowing = useBreaksStore((state) => state.isNewBreakModalShowing)
+  const setIsNewBreakModalShowing = useBreaksStore((state) => state.setIsNewBreakModalShowing)
+
+  console.log('555', breaks)
+
+  useEffect(() => {
+    axios
+      .get(api)
+      .then((response) => {
+        const tempArr: any = []
+
+        response.data.forEach((entry: any) => {
+          tempArr.push(entry)
+        })
+
+        setBreaks(tempArr)
+      })
+      .catch((error) => {
+        console.log(222, error)
+      })
+  }, [setBreaks])
 
   useEffect(() => {
     const closeModal = (e: any) => {
       if (e.keyCode === 27) {
-        if (!isModalShowing) return
+        if (!isNewBreakModalShowing) return
 
-        if (isModalShowing) {
-          setIsModalShowing(prevState => !prevState)
-          setNewBreakName('')
+        if (isNewBreakModalShowing) {
+          setIsNewBreakModalShowing()
+          setNewBreakName("")
         }
       }
     }
 
-    window.addEventListener('keydown', closeModal)
+    window.addEventListener("keydown", closeModal)
 
-    return () => window.removeEventListener('keydown', closeModal)
+    return () => window.removeEventListener("keydown", closeModal)
   })
 
   const deleteBreak = (breakId: string, api: string) => {
@@ -60,8 +77,7 @@ const Dashboard = () => {
             response.data.forEach((entry: any) => {
               tempArr.push(entry)
             })
-            // @ts-expect-error  Type 'never' has no call signatures
-            setAllBreaks(tempArr)
+            setBreaks(tempArr)
           })
           .catch((error) => {
             console.log(222, error)
@@ -73,36 +89,36 @@ const Dashboard = () => {
   }
 
   const submitForm = (api: string) => {
-    axios.post(`${api}`, {
-      break_name: newBreakName
-    })
-    .then((response) => {
-      axios
-      .get(api)
+    axios
+      .post(`${api}`, {
+        break_name: newBreakName,
+      })
       .then((response) => {
-        const tempArr: any = []
+        axios
+          .get(api)
+          .then((response) => {
+            const tempArr: any = []
 
-        response.data.forEach((entry: any) => {
-          tempArr.push(entry)
-        })
-        // @ts-expect-error  Type 'never' has no call signatures
-        setAllBreaks(tempArr)
+            response.data.forEach((entry: any) => {
+              tempArr.push(entry)
+            })
+            setBreaks(tempArr)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+
+        setNewBreakName("")
+        setIsNewBreakModalShowing()
       })
       .catch((error) => {
         console.log(error)
       })
-
-      setNewBreakName('')
-      setIsModalShowing(prevState => !prevState)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
   }
 
   return (
     <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
-      {isModalShowing && (
+      {isNewBreakModalShowing && (
         <Modal>
           <form style={{ padding: "12px" }}>
             <h4 style={{ margin: "0px" }}>Form title</h4>
@@ -127,13 +143,12 @@ const Dashboard = () => {
             textAlign: "center",
           }}
         >
-          {/** @ts-expect-error Property 'length' does not exist on type 'never'. */}
-          {`${allBreaks.length} breaks`}
+          {`${breaks.length}`}
         </h4>
         <Button
           label="New break"
           style={{ gridColumn: "12 / 15" }}
-          onClick={() => setIsModalShowing(prevState => !prevState)}
+          onClick={setIsNewBreakModalShowing}
         />
       </Header>
       <div
@@ -144,8 +159,7 @@ const Dashboard = () => {
           gap: "20px",
         }}
       >
-        {/** @ts-expect-error Property 'map' does not exist on type 'never'. */}
-        {allBreaks.map((boxBreak: any, idx: number) => {
+        {breaks.map((boxBreak: any, idx: number) => {
           const breakDate = moment(boxBreak.break_date).format(
             "MMMM Do YYYY, h:mm:ss"
           )
