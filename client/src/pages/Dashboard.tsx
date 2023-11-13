@@ -8,7 +8,8 @@ import Card from "../components/card/Card"
 import Header from "../components/header/Header"
 import Modal from "../components/modal/Modal"
 
-const api = "http://localhost:5656/box_breaks"
+// const api = "http://localhost:5656/box_breaks"
+const api = "https://wax-breaker-db-service.onrender.com/box_breaks"
 
 const StyledButton = styled(Button)`
   width: 100%;
