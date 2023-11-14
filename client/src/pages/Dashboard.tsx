@@ -30,8 +30,6 @@ const Dashboard = () => {
   const isNewBreakModalShowing = useBreaksStore((state) => state.isNewBreakModalShowing)
   const setIsNewBreakModalShowing = useBreaksStore((state) => state.setIsNewBreakModalShowing)
 
-  console.log('555', breaks)
-
   useEffect(() => {
     axios
       .get(api)

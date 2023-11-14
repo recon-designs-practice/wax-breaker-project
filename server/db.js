@@ -1,20 +1,21 @@
 const Pool = require("pg").Pool;
+console.log(require('dotenv').config())
+
 
 const pool = new Pool({
-  connectionString:
-    "postgres://steadyuser:qG8NjFK7K1M52EFZvLZR05unW9nwgODc@dpg-cl99hvuma2hs73c5vqjg-a/waxbreakerdb_jkhr",
+  connectionString: process.env.RENDER_DATABASE_CONNECTION_STRING,
   ssl: { rejectUnauthorized: false },
-  host: "dpg-cl99hvuma2hs73c5vqjg-a",
-  port: "5432",
-  user: "steadyuser",
-  database: "waxbreakerdb_jkhr",
-  password: "qG8NjFK7K1M52EFZvLZR05unW9nwgODc",
+  host: process.env.RENDER_DATABASE_HOST,
+  port: process.env.RENDER_DATABASE_PORT,
+  user: process.env.RENDER_DATABASE_USER,
+  database: process.env.RENDER_DATABASE_NAME,
+  password: process.env.RENDER_DATABASE_PASSWORD,
 
-  // user: 'postgres',
-  // password: '122101',
-  // host: 'localhost',
-  // port: '5432',
-  // database: 'waxbreakerdb'
+  // user: process.env.LOCAL_DATABASE_USER,
+  // password: process.env.LOCAL_DATABASE_PASSWORD,
+  // host: process.env.LOCAL_DATABASE_HOST,
+  // port: process.env.LOCAL_DATATBASE_PORT,
+  // database: process.env.LOCAL_DATABASE_NAME
 });
 
 module.exports = pool;
