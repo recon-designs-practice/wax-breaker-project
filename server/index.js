@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const breaksRoutes = require('./routes/breaksRoutes')
 const usersRoutes = require('./routes/userRoutes')
+require('dotenv').config()
 
 const app = express()
 const PORT = 5656
