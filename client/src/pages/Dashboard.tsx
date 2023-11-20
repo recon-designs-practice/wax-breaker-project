@@ -1,68 +1,105 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import styled from "@emotion/styled"
-import moment from "moment"
-import useBreaksStore from "../stores/store"
-import { Button, Input } from "be-ubiquitous"
-import Card from "../components/card/Card"
-import Header from "../components/header/Header"
-import Modal from "../components/modal/Modal"
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "@emotion/styled";
+import moment from "moment";
+import useBreaksStore from "../stores/store";
+import { Button, Input } from "be-ubiquitous";
+import Card from "../components/card/Card";
+import Header from "../components/header/Header";
+import Modal from "../components/modal/Modal";
 
 // const api = "http://localhost:5656/box_breaks"
-const api = "https://wax-breaker-db-service.onrender.com/box_breaks"
+const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
 
-const StyledButton = styled(Button)`
-  // width: 100%;
-`
-
-const StyledH3 = styled("h3")(({ theme }) => ({
+const CardTitle = styled.h3(({ theme }) => ({
   color: theme.color.onPrimary,
-}))
+}));
 
-const StyledP = styled("p")(({ theme }) => ({
+const CardSubtitle = styled("p")(({ theme }) => ({
   color: theme.color.onPrimary,
-}))
+}));
+
+const DashboardContainer = styled("div")({
+  paddingLeft: "40px",
+  paddingRight: "40px",
+});
+
+const Form = styled("form")({
+  padding: "12px",
+});
+
+const FormHeading = styled("h4")({
+  margin: "0px",
+});
+
+const HeaderTitle = styled("h1")({
+  margin: "0px",
+  gridColumn: "span 6",
+});
+
+const HeaderCount = styled("h4")({
+  margin: "0px",
+  paddingTop: "8px",
+  gridColumn: "7 / 9",
+  textAlign: "center",
+});
+
+const BreaksSection = styled("div")({
+  paddingTop: "40px",
+  display: "grid",
+  gridTemplateColumns: "repeat(12, 1fr)",
+  gap: "20px"
+});
+
+const CardWrapper = styled("div")({
+  gridColumn: "span 3",
+});
 
 const Dashboard = () => {
-  const [newBreakName, setNewBreakName] = useState("")
-  const breaks = useBreaksStore((state) => state.breaks)
-  const setBreaks = useBreaksStore((state) => state.setAllStoreBreaks)
-  const isNewBreakModalShowing = useBreaksStore((state) => state.isNewBreakModalShowing)
-  const setIsNewBreakModalShowing = useBreaksStore((state) => state.setIsNewBreakModalShowing)
+  const [newBreakName, setNewBreakName] = useState("");
+  const breaks = useBreaksStore((state) => state.breaks);
+  const setBreaks = useBreaksStore((state) => state.setAllStoreBreaks);
+  const isNewBreakModalShowing = useBreaksStore(
+    (state) => state.isNewBreakModalShowing
+  );
+  const setIsNewBreakModalShowing = useBreaksStore(
+    (state) => state.setIsNewBreakModalShowing
+  );
 
   useEffect(() => {
     axios
       .get(api)
       .then((response) => {
-        const tempArr: any = []
+        const tempArr: any = [];
 
         response.data.forEach((entry: any) => {
-          tempArr.push(entry)
-        })
+          tempArr.push(entry);
+        });
 
-        setBreaks(tempArr)
+        setBreaks(tempArr);
       })
       .catch((error) => {
-        console.log(222, error)
-      })
-  }, [setBreaks])
+        console.log(222, error);
+      });
+  }, [setBreaks]);
 
   useEffect(() => {
     const closeModal = (e: any) => {
       if (e.keyCode === 27) {
-        if (!isNewBreakModalShowing) return
+        if (!isNewBreakModalShowing) return;
 
         if (isNewBreakModalShowing) {
-          setIsNewBreakModalShowing()
-          setNewBreakName("")
+          setIsNewBreakModalShowing();
+          setNewBreakName("");
         }
       }
-    }
+    };
 
-    window.addEventListener("keydown", closeModal)
+    window.addEventListener("keydown", closeModal);
 
-    return () => window.removeEventListener("keydown", closeModal)
-  })
+    return () => window.removeEventListener("keydown", closeModal);
+  });
 
   const deleteBreak = (breakId: string, api: string) => {
     axios
@@ -71,21 +108,21 @@ const Dashboard = () => {
         axios
           .get(api)
           .then((response) => {
-            const tempArr: any = []
+            const tempArr: any = [];
 
             response.data.forEach((entry: any) => {
-              tempArr.push(entry)
-            })
-            setBreaks(tempArr)
+              tempArr.push(entry);
+            });
+            setBreaks(tempArr);
           })
           .catch((error) => {
-            console.log(222, error)
-          })
+            console.log(222, error);
+          });
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   const submitForm = (api: string) => {
     axios
@@ -96,31 +133,31 @@ const Dashboard = () => {
         axios
           .get(api)
           .then((response) => {
-            const tempArr: any = []
+            const tempArr: any = [];
 
             response.data.forEach((entry: any) => {
-              tempArr.push(entry)
-            })
-            setBreaks(tempArr)
+              tempArr.push(entry);
+            });
+            setBreaks(tempArr);
           })
           .catch((error) => {
-            console.log(error)
-          })
+            console.log(error);
+          });
 
-        setNewBreakName("")
-        setIsNewBreakModalShowing()
+        setNewBreakName("");
+        setIsNewBreakModalShowing();
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
   return (
-    <div style={{ paddingLeft: "40px", paddingRight: "40px" }}>
+    <DashboardContainer>
       {isNewBreakModalShowing && (
         <Modal>
-          <form style={{ padding: "12px" }}>
-            <h4 style={{ margin: "0px" }}>Form title</h4>
+          <Form>
+            <FormHeading>Form title</FormHeading>
             <Input
               label="Label goes here"
               // @ts-expect-error Type '(e: any) => void'... delete comment to see full error
@@ -129,62 +166,48 @@ const Dashboard = () => {
               value={newBreakName}
             />
             <Button label="Add break" onClick={() => submitForm(api)} />
-          </form>
+          </Form>
         </Modal>
       )}
       <Header>
-        <h1 style={{ margin: "0px", gridColumn: "span 6" }}>Title here</h1>
-        <h4
+        <HeaderTitle>Title here</HeaderTitle>
+        <HeaderCount>{`${breaks.length}`}</HeaderCount>
+        <div
           style={{
-            margin: "0px",
-            paddingTop: "8px",
-            gridColumn: "7 / 9",
-            textAlign: "center",
+            gridColumn: "13 / 15",
+            display: "flex",
+            justifyContent: "flex-end",
           }}
         >
-          {`${breaks.length}`}
-        </h4>
-        <div style={{ gridColumn: "13 / 15", display: 'flex', justifyContent: 'flex-end' }}>
-        <Button
-          label="New break"
-          // style={{ justifySelf: 'end' }}
-          onClick={setIsNewBreakModalShowing}
-        />
+          <Button
+            label="New break"
+            // style={{ justifySelf: 'end' }}
+            onClick={setIsNewBreakModalShowing}
+          />
         </div>
-        
       </Header>
-      <div
-        style={{
-          paddingTop: "40px",
-          display: "grid",
-          gridTemplateColumns: "repeat(12, 1fr)",
-          gap: "20px",
-        }}
-      >
+      <BreaksSection>
         {breaks.map((boxBreak: any, idx: number) => {
           const breakDate = moment(boxBreak.break_date).format(
             "MMMM Do YYYY, h:mm:ss"
-          )
+          );
 
           return (
-            <Card
-              key={idx}
-              style={{
-                gridColumn: "span 3",
-              }}
-            >
-              <StyledH3>{boxBreak.break_name}</StyledH3>
-              <StyledP>{breakDate}</StyledP>
-              <StyledButton
-                label="Button"
-                onClick={() => deleteBreak(boxBreak.box_break_id, api)}
-              />
-            </Card>
-          )
+            <CardWrapper>
+              <Card key={idx}>
+                <CardTitle>{boxBreak.break_name}</CardTitle>
+                <CardSubtitle>{breakDate}</CardSubtitle>
+                <Button
+                  label="Button"
+                  onClick={() => deleteBreak(boxBreak.box_break_id, api)}
+                />
+              </Card>
+            </CardWrapper>
+          );
         })}
-      </div>
-    </div>
-  )
-}
+      </BreaksSection>
+    </DashboardContainer>
+  );
+};
 
-export default Dashboard
+export default Dashboard;
