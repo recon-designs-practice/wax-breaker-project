@@ -12,7 +12,7 @@ import Modal from "../components/modal/Modal"
 const api = "https://wax-breaker-db-service.onrender.com/box_breaks"
 
 const StyledButton = styled(Button)`
-  width: 100%;
+  // width: 100%;
 `
 
 const StyledH3 = styled("h3")(({ theme }) => ({
@@ -144,11 +144,14 @@ const Dashboard = () => {
         >
           {`${breaks.length}`}
         </h4>
+        <div style={{ gridColumn: "13 / 15", display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           label="New break"
-          style={{ gridColumn: "12 / 15" }}
+          // style={{ justifySelf: 'end' }}
           onClick={setIsNewBreakModalShowing}
         />
+        </div>
+        
       </Header>
       <div
         style={{
