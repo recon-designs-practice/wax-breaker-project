@@ -13,10 +13,15 @@ import Modal from "../components/modal/Modal";
 const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
 
 const CardTitle = styled.h3(({ theme }) => ({
+  margin: '0px',
   color: theme.color.onPrimary,
+  fontSize: '18px',
+  lineHeight: '20px',
+  height: '40px'
 }));
 
 const CardSubtitle = styled("p")(({ theme }) => ({
+  margin: '0px 0px 20px 0px',
   color: theme.color.onPrimary,
 }));
 
@@ -35,7 +40,7 @@ const FormHeading = styled("h4")({
 
 const HeaderTitle = styled("h1")({
   margin: "0px",
-  gridColumn: "span 6",
+  gridColumn: "span 6"
 });
 
 const HeaderCount = styled("h4")({
@@ -53,7 +58,19 @@ const BreaksSection = styled("div")({
 });
 
 const CardWrapper = styled("div")({
-  gridColumn: "span 3",
+  gridColumn: "span 12",
+  '@media (min-width: 768px)': {
+    gridColumn: "span 6",
+  },
+  '@media (min-width: 1024px)': {
+    gridColumn: "span 4",
+  },
+  '@media (min-width: 1280px)': {
+    gridColumn: "span 3",
+  },
+  '@media (min-width: 1536px)': {
+    gridColumn: "span 2",
+  }
 });
 
 const Dashboard = () => {
@@ -198,7 +215,8 @@ const Dashboard = () => {
                 <CardTitle>{boxBreak.break_name}</CardTitle>
                 <CardSubtitle>{breakDate}</CardSubtitle>
                 <Button
-                  label="Button"
+                  variant="secondary"
+                  label="Delete"
                   onClick={() => deleteBreak(boxBreak.box_break_id, api)}
                 />
               </Card>
