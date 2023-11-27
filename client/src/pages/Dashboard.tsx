@@ -8,6 +8,9 @@ import { Button, Input } from "be-ubiquitous";
 import Card from "../components/card/Card";
 import Header from "../components/header/Header";
 import Modal from "../components/modal/Modal";
+import Signin from "./Signin";
+import Signup from "./Signup";
+import AuthDetails from "../components/AuthDetails";
 
 // const api = "http://localhost:5656/box_breaks"
 const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
@@ -224,6 +227,12 @@ const Dashboard = () => {
           );
         })}
       </BreaksSection>
+      <div>
+        <h2>New section</h2>
+        <Signin message="Sign in here." />
+        <Signup message="Sign up here." />
+        <AuthDetails />
+      </div>
     </DashboardContainer>
   );
 };
