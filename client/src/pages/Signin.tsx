@@ -1,12 +1,9 @@
 import React from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase'
+import AuthDetails from '../components/AuthDetails'
 
-type Props = {
-  message: string
-}
-
-const Signin = (props: Props) => {
+const Signin = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
@@ -23,13 +20,13 @@ const Signin = (props: Props) => {
 
   return (
     <div>
-      {props.message}
       <form onSubmit={signIn}>
-        <h1>Log in</h1>
+        <h1>Sign in</h1>
         <input type='email' placeholder='Enter an email' value={email} onChange={(e) => setEmail(e.target.value)} />
         <input type='password' placeholder='Enter a password' value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button>Log in</button>
+        <button>Sign in</button>
       </form>
+      <AuthDetails />
     </div>
   )
 }
