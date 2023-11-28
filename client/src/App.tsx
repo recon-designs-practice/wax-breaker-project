@@ -6,7 +6,6 @@ import ErrorPage from "./error-page";
 import Dashboard from "./pages/Dashboard";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
-import HiddenPage from "./pages/HiddenPage";
 
 // @ts-expect-error
 const PrivateRoutes = ({ children }) => {
@@ -50,14 +49,6 @@ function App() {
             path="/sign-up"
             element={<Signup />}
             errorElement={<ErrorPage />}
-          />
-          <Route
-            path="/hidden-page"
-            element={
-              <PrivateRoutes>
-                <HiddenPage />
-              </PrivateRoutes>
-            }
           />
         </Routes>
       </BrowserRouter>
