@@ -10,7 +10,7 @@ import AuthDetails from "../../components/AuthDetails";
 // const api = "http://localhost:5656/box_breaks";
 const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
 
-const DashboardContainer = styled("div")({
+const DashboardContainer = styled("main")({
   // border: "2px solid hotpink",
 });
 
@@ -69,9 +69,9 @@ const Dashboard = () => {
         </Modal>
       )}
       <BreakSection />
-      <div>
+      <section>
         <AuthDetails />
-      </div>
+      </section>
     </DashboardContainer>
   );
 };

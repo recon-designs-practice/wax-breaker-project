@@ -30,7 +30,7 @@ const AppContainer = styled("div")({
   height: "100vh",
 
   "@media (min-width: 768px)": {
-    padding: "0px 40px"
+    padding: "0px 40px",
   },
 });
 
@@ -38,31 +38,29 @@ function App() {
   return (
     <AppContainer>
       <Header />
-      <main>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <PrivateRoutes>
-                  <Dashboard />
-                </PrivateRoutes>
-              }
-              errorElement={<ErrorPage />}
-            />
-            <Route
-              path="/sign-in"
-              element={<Signin />}
-              errorElement={<ErrorPage />}
-            />
-            <Route
-              path="/sign-up"
-              element={<Signup />}
-              errorElement={<ErrorPage />}
-            />
-          </Routes>
-        </BrowserRouter>
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoutes>
+                <Dashboard />
+              </PrivateRoutes>
+            }
+            errorElement={<ErrorPage />}
+          />
+          <Route
+            path="/sign-in"
+            element={<Signin />}
+            errorElement={<ErrorPage />}
+          />
+          <Route
+            path="/sign-up"
+            element={<Signup />}
+            errorElement={<ErrorPage />}
+          />
+        </Routes>
+      </BrowserRouter>
     </AppContainer>
   );
 }
