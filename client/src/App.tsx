@@ -3,10 +3,7 @@ import { Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import styled from "@emotion/styled";
-import ErrorPage from "./error-page";
-import Dashboard from "./pages/Dashboard";
-import Signin from "./pages/Signin";
-import Signup from "./pages/Signup";
+import { Dashboard, Signin, Signup, ErrorPage } from "./pages";
 import Header from "./components/header/Header";
 
 // @ts-expect-error

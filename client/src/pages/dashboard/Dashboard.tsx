@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "@emotion/styled";
 import moment from "moment";
-import useBreaksStore from "../stores/store";
+import useBreaksStore from "../../stores/store";
 import { Button, Input } from "be-ubiquitous";
-import Card from "../components/card/Card";
-import Modal from "../components/modal/Modal";
-import AuthDetails from "../components/AuthDetails";
+import Card from "../../components/card/Card";
+import Modal from "../../components/modal/Modal";
+import AuthDetails from "../../components/AuthDetails";
 
 // const api = "http://localhost:5656/box_breaks"
 const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
@@ -25,8 +25,7 @@ const CardSubtitle = styled("p")(({ theme }) => ({
 }));
 
 const DashboardContainer = styled("div")({
-  paddingLeft: "40px",
-  paddingRight: "40px",
+  border: '2px solid hotpink'
 });
 
 const Form = styled("form")({
