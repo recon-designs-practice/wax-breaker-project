@@ -9,8 +9,8 @@ import Header from "../components/header/Header";
 import Modal from "../components/modal/Modal";
 import AuthDetails from "../components/AuthDetails";
 
-// const api = "http://localhost:5656/box_breaks"
-const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
+const api = "http://localhost:5656/box_breaks"
+// const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
 
 const CardTitle = styled.h3(({ theme }) => ({
   margin: "0px",

@@ -14,8 +14,7 @@ const Signin = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
@@ -43,9 +42,6 @@ const Signin = () => {
           value={password}
         />
         <Button type="submit" label="Sign in" />
-        {/* <input type='email' placeholder='Enter an email' value={email} onChange={(e) => setEmail(e.target.value)} /> */}
-        {/* <input type='password' placeholder='Enter a password' value={password} onChange={(e) => setPassword(e.target.value)} /> */}
-        {/* <button>Sign in</button> */}
       </form>
       <AuthDetails />
     </div>
