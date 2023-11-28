@@ -4,11 +4,15 @@ import styled from "@emotion/styled";
 import moment from "moment";
 import useBreaksStore from "../../stores/store";
 import { Button, Card, Modal } from '../../components'
-import { Input } from "be-ubiquitous";
+import NewBreakModalForm from "./NewBreakModal/NewBreakModalForm";
 import AuthDetails from "../../components/AuthDetails";
 
 // const api = "http://localhost:5656/box_breaks"
 const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
+
+const DashboardContainer = styled("div")({
+  border: '2px solid hotpink'
+});
 
 const CardTitle = styled.h3(({ theme }) => ({
   margin: "0px",
@@ -22,18 +26,6 @@ const CardSubtitle = styled("p")(({ theme }) => ({
   margin: "0px 0px 20px 0px",
   color: theme.color.onPrimary,
 }));
-
-const DashboardContainer = styled("div")({
-  border: '2px solid hotpink'
-});
-
-const Form = styled("form")({
-  padding: "12px",
-});
-
-const FormHeading = styled("h4")({
-  margin: "0px",
-});
 
 const BreaksSection = styled("div")({
   paddingTop: "40px",
@@ -126,49 +118,11 @@ const Dashboard = () => {
       });
   };
 
-  const submitForm = (api: string) => {
-    axios
-      .post(`${api}`, {
-        break_name: newBreakName,
-      })
-      .then((response) => {
-        axios
-          .get(api)
-          .then((response) => {
-            const tempArr: any = [];
-
-            response.data.forEach((entry: any) => {
-              tempArr.push(entry);
-            });
-            setBreaks(tempArr);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
-        setNewBreakName("");
-        setIsNewBreakModalShowing();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <DashboardContainer>
       {isNewBreakModalShowing && (
         <Modal>
-          <Form>
-            <FormHeading>Form title</FormHeading>
-            <Input
-              label="Label goes here"
-              // @ts-expect-error Type '(e: any) => void'... delete comment to see full error
-              onchange={(e: any) => setNewBreakName(e.target.value)}
-              placeholder="Placeholder thing"
-              value={newBreakName}
-            />
-            <Button label="Add break" onClick={() => submitForm(api)} />
-          </Form>
+          <NewBreakModalForm newBreakNameValue={newBreakName} newBreakNameOnChange={setNewBreakName}  />
         </Modal>
       )}
       <BreaksSection>
