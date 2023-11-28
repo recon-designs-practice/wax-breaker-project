@@ -5,7 +5,6 @@ import moment from "moment";
 import useBreaksStore from "../stores/store";
 import { Button, Input } from "be-ubiquitous";
 import Card from "../components/card/Card";
-import Header from "../components/header/Header";
 import Modal from "../components/modal/Modal";
 import AuthDetails from "../components/AuthDetails";
 
@@ -36,18 +35,6 @@ const Form = styled("form")({
 
 const FormHeading = styled("h4")({
   margin: "0px",
-});
-
-const HeaderTitle = styled("h1")({
-  margin: "0px",
-  gridColumn: "span 6",
-});
-
-const HeaderCount = styled("h4")({
-  margin: "0px",
-  paddingTop: "8px",
-  gridColumn: "7 / 9",
-  textAlign: "center",
 });
 
 const BreaksSection = styled("div")({
@@ -186,23 +173,6 @@ const Dashboard = () => {
           </Form>
         </Modal>
       )}
-      <Header>
-        <HeaderTitle>Title here</HeaderTitle>
-        <HeaderCount>{`${breaks.length}`}</HeaderCount>
-        <div
-          style={{
-            gridColumn: "13 / 15",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
-          <Button
-            label="New break"
-            // style={{ justifySelf: 'end' }}
-            onClick={setIsNewBreakModalShowing}
-          />
-        </div>
-      </Header>
       <BreaksSection>
         {breaks.map((boxBreak: any, idx: number) => {
           const breakDate = moment(boxBreak.break_date).format(

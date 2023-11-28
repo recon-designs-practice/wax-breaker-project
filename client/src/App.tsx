@@ -2,10 +2,12 @@ import React from "react";
 import { Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
+import styled from "@emotion/styled";
 import ErrorPage from "./error-page";
 import Dashboard from "./pages/Dashboard";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import Header from "./components/header/Header";
 
 // @ts-expect-error
 const PrivateRoutes = ({ children }) => {
@@ -26,9 +28,21 @@ const PrivateRoutes = ({ children }) => {
   return authUser ? children : <Navigate to="/sign-in" />;
 };
 
+const AppContainer = styled('div')({
+  padding: '0px 20px',
+  height: '100vh',
+  border: '2px solid orange',
+
+  "@media (min-width: 768px)": {
+    padding: '0px 40px',
+    // borderColor: 'blue'
+  }
+})
+
 function App() {
   return (
-    <div>
+    <AppContainer>
+      <Header />
       <BrowserRouter>
         <Routes>
           <Route
@@ -52,7 +66,7 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-    </div>
+    </AppContainer>
   );
 }
 
