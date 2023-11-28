@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import styled from "@emotion/styled";
 import { Dashboard, Signin, Signup, ErrorPage } from "./pages";
-import Header from "./components/header/Header";
+import { Header } from './components'
 
 // @ts-expect-error
 const PrivateRoutes = ({ children }) => {

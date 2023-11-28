@@ -3,9 +3,8 @@ import axios from "axios";
 import styled from "@emotion/styled";
 import moment from "moment";
 import useBreaksStore from "../../stores/store";
-import { Button, Input } from "be-ubiquitous";
-import Card from "../../components/card/Card";
-import Modal from "../../components/modal/Modal";
+import { Button, Card, Modal } from '../../components'
+import { Input } from "be-ubiquitous";
 import AuthDetails from "../../components/AuthDetails";
 
 // const api = "http://localhost:5656/box_breaks"
