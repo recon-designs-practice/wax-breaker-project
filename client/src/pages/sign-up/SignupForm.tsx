@@ -1,18 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { Input, Button } from "be-ubiquitous";
-import AuthDetails from "../components/AuthDetails";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { Button } from "../../components";
+import { Input } from "be-ubiquitous";
 
-const Signin = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+type Props = {
+  email?: any;
+  password?: any;
+};
+
+export default function SignupForm({ email, password }: Props) {
   const navigate = useNavigate();
 
-  const signIn = (e: any) => {
+  const signUp = (e: any) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email.value, password.value)
       .then((userCredential) => {
         navigate("/");
       })
@@ -23,29 +26,26 @@ const Signin = () => {
 
   return (
     <div>
-      <form onSubmit={signIn}>
+      <form onSubmit={signUp}>
         <h1>Sign in</h1>
         <Input
           label="Email"
           type="email"
           // @ts-expect-error Type '(e: any) => void'... delete comment to see full error
-          onchange={(e: any) => setEmail(e.target.value)}
+          onchange={(e: any) => email.onchange(e.target.value)}
           placeholder="Enter an email"
-          value={email}
+          value={email.value}
         />
         <Input
           label="Password"
           type="password"
           // @ts-expect-error Type '(e: any) => void'... delete comment to see full error
-          onchange={(e: any) => setPassword(e.target.value)}
+          onchange={(e: any) => password.onchange(e.target.value)}
           placeholder="Password"
-          value={password}
+          value={password.value}
         />
         <Button type="submit" label="Sign in" />
       </form>
-      <AuthDetails />
     </div>
   );
-};
-
-export default Signin;
+}
