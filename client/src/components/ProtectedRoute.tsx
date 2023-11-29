@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }: any) => {
     });
 
     return listen;
-  });
+  }, []);
 
   return authUser ? children : <Navigate to="/sign-in" />;
 };
