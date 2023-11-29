@@ -1,6 +1,8 @@
 import { createWithEqualityFn } from "zustand/traditional";
 
 const useAuthStore = createWithEqualityFn((set) => ({
+  isUserAuthenticated: false,
+  setIsUserAuthenticated: () => set((state) => ({ isUserAuthenticated: !state.isUserAuthenticated })),
   currentUser: null,
   // setCurrentUser: (stuffToAdd) => set(() => ({ currentUser: {...stuffToAdd}}))
   setCurrentUser: (stuffToAdd) =>
