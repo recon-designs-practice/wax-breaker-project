@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import styled from "@emotion/styled";
-import useBreaksStore from "./stores/store";
+import useAuthStore from "./stores/authStore";
 import { Dashboard, Signin, Signup, ErrorPage } from "./pages";
 import { ProtectedRoute, Header } from "./components";
 
@@ -17,8 +17,8 @@ const AppContainer = styled("div")({
 });
 
 function App() {
-  // const authUser = useBreaksStore((state) => state.currentUser)
-  const setAuthUser = useBreaksStore((state) => state.setCurrentUser)
+  const authUser = useAuthStore((state) => state.currentUser)
+  const setAuthUser = useAuthStore((state) => state.setCurrentUser)
 
   React.useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -33,6 +33,8 @@ function App() {
 
     return listen;
   }, [setAuthUser]);
+
+  console.log(555, authUser)
 
   return (
     <AppContainer>

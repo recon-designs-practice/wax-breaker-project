@@ -1,11 +1,11 @@
 import React from "react";
-import useBreaksStore from "../stores/store";
+import useAuthStore from "../stores/authStore";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
 export default function AuthDetails() {
-  const authUser = useBreaksStore((state) => state.currentUser);
-  const setAuthUser = useBreaksStore((state) => state.setCurrentUser)
+  const authUser = useAuthStore((state) => state.currentUser);
+  const setAuthUser = useAuthStore((state) => state.setCurrentUser)
 
   const userSignOut = () => {
     signOut(auth)

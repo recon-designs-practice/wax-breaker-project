@@ -5,16 +5,7 @@ const useBreaksStore = createWithEqualityFn((set) => ({
   setAllStoreBreaks: (stuffToAdd) => set(() => ({ breaks: [...stuffToAdd] })),
   isNewBreakModalShowing: false,
   setIsNewBreakModalShowing: () =>
-    set((state) => ({ isNewBreakModalShowing: !state.isNewBreakModalShowing })),
-  currentUser: null,
-  // setCurrentUser: (stuffToAdd) => set(() => ({ currentUser: {...stuffToAdd}}))
-  setCurrentUser: (stuffToAdd) => set(() => {
-    if (stuffToAdd === null) {
-      return null
-    } else {
-      return ({ currentUser: {...stuffToAdd} })
-    }
-  })
+    set((state) => ({ isNewBreakModalShowing: !state.isNewBreakModalShowing }))
 }))
 
 export default useBreaksStore
