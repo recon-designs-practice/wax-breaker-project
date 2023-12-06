@@ -1,31 +1,32 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import moment from "moment";
 import axios from "axios";
 import useBreaksStore from "../../../stores/store";
 import { Card, Button } from "../../../components";
-import { Theme } from '@emotion/react'
+import { Theme } from "@emotion/react";
 
 // const api = "http://localhost:5656/box_breaks";
 const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
 
 type SectionProps = {
-  theme?: Theme
-} & React.HTMLAttributes<HTMLElement>
+  theme?: Theme;
+} & React.HTMLAttributes<HTMLElement>;
 
 const Section = styled.section<SectionProps>(
   {
     paddingTop: "40px",
     display: "grid",
     gridTemplateColumns: "repeat(12, 1fr)",
-    gap: "20px"
+    gap: "20px",
   },
   ({ theme }) => ({})
 );
 
 type CardWrapperProps = {
-  theme?: Theme
-} & React.HTMLAttributes<HTMLElement>
+  theme?: Theme;
+} & React.HTMLAttributes<HTMLElement>;
 
 const CardWrapper = styled("div")<CardWrapperProps>({
   gridColumn: "span 12",
@@ -44,8 +45,8 @@ const CardWrapper = styled("div")<CardWrapperProps>({
 });
 
 type CardTitleProps = {
-  theme?: Theme
-} & React.HTMLAttributes<HTMLHeadingElement>
+  theme?: Theme;
+} & React.HTMLAttributes<HTMLHeadingElement>;
 
 const CardTitle = styled.h3<CardTitleProps>(({ theme }) => ({
   margin: "0px",
@@ -56,8 +57,8 @@ const CardTitle = styled.h3<CardTitleProps>(({ theme }) => ({
 }));
 
 type CardSubtitleProps = {
-  theme?: Theme
-} & React.HTMLAttributes<HTMLParagraphElement>
+  theme?: Theme;
+} & React.HTMLAttributes<HTMLParagraphElement>;
 
 const CardSubtitle = styled("p")<CardSubtitleProps>(({ theme }) => ({
   margin: "0px 0px 20px 0px",
@@ -67,6 +68,7 @@ const CardSubtitle = styled("p")<CardSubtitleProps>(({ theme }) => ({
 export default function BreakSection() {
   const breaks = useBreaksStore((state) => state.breaks);
   const setBreaks = useBreaksStore((state) => state.setAllStoreBreaks);
+  const navigate = useNavigate();
 
   const deleteBreak = (breakId: string, api: string) => {
     axios
@@ -94,9 +96,7 @@ export default function BreakSection() {
   return (
     <Section>
       {breaks.map((boxBreak: any, idx: number) => {
-        const breakDate = moment(boxBreak.break_date).format(
-          "MM/DD/YYYY"
-        );
+        const breakDate = moment(boxBreak.break_date).format("MM/DD/YYYY");
 
         return (
           <CardWrapper key={idx}>
@@ -107,6 +107,11 @@ export default function BreakSection() {
                 variant="secondary"
                 label="Delete"
                 onClick={() => deleteBreak(boxBreak.box_break_id, api)}
+              />
+              <Button
+                variant="primary"
+                label="View"
+                onClick={() => navigate(`/break-page/${boxBreak.box_break_id}`)}
               />
             </Card>
           </CardWrapper>
