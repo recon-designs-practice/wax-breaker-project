@@ -34,8 +34,6 @@ function App() {
     return listen;
   }, [setAuthUser]);
 
-  console.log(555, authUser)
-
   return (
     <AppContainer>
       <Header />
