@@ -17,7 +17,6 @@ const AppContainer = styled("div")({
 });
 
 function App() {
-  // const authUser = useAuthStore((state) => state.currentUser)
   const setAuthUser = useAuthStore((state) => state.setCurrentUser);
 
   React.useEffect(() => {
@@ -57,7 +56,7 @@ function App() {
             errorElement={<ErrorPage />}
           />
           <Route
-            path="/break-page"
+            path="/break-page/:breakId"
             element={<BreakPage />}
             errorElement={<ErrorPage />}
           />
