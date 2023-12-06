@@ -1,29 +1,11 @@
 import React from "react";
-import { Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import styled from "@emotion/styled";
+import useAuthStore from "./stores/authStore";
 import { Dashboard, Signin, Signup, ErrorPage } from "./pages";
-import { Header } from "./components";
-
-// @ts-expect-error
-const PrivateRoutes = ({ children }) => {
-  const [authUser, setAuthUser] = React.useState(true);
-
-  React.useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(true);
-      } else {
-        setAuthUser(false);
-      }
-    });
-
-    return listen;
-  });
-
-  return authUser ? children : <Navigate to="/sign-in" />;
-};
+import { ProtectedRoute, Header } from "./components";
 
 const AppContainer = styled("div")({
   padding: "0px 20px",
@@ -35,6 +17,25 @@ const AppContainer = styled("div")({
 });
 
 function App() {
+  const authUser = useAuthStore((state) => state.currentUser)
+  const setAuthUser = useAuthStore((state) => state.setCurrentUser)
+
+  React.useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+      
+        setAuthUser(user)
+      } else {
+      
+        setAuthUser(null)
+      }
+    });
+
+    return listen;
+  }, [setAuthUser]);
+
+  console.log(555, authUser)
+
   return (
     <AppContainer>
       <Header />
@@ -43,9 +44,9 @@ function App() {
           <Route
             path="/"
             element={
-              <PrivateRoutes>
+              <ProtectedRoute>
                 <Dashboard />
-              </PrivateRoutes>
+              </ProtectedRoute>
             }
             errorElement={<ErrorPage />}
           />
