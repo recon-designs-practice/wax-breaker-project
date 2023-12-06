@@ -56,7 +56,7 @@ function App() {
             errorElement={<ErrorPage />}
           />
           <Route
-            path="/break-page/:breakId"
+            path="/box-break/:breakId"
             element={
               <ProtectedRoute>
                 <BreakPage />
