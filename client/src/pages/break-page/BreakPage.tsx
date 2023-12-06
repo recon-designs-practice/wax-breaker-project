@@ -27,8 +27,6 @@ export default function BreakPage() {
       .catch((error) => console.log(222, error));
   }, [apiString]);
 
-  console.log(111, breakDetails);
-
   return (
     <div>
       {breakDetails && <h1>{breakDetails.break_name}</h1>}
