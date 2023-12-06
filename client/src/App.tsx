@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import styled from "@emotion/styled";
 import useAuthStore from "./stores/authStore";
-import { Dashboard, Signin, Signup, ErrorPage } from "./pages";
+import { Dashboard, Signin, Signup, ErrorPage, BreakPage } from "./pages";
 import { ProtectedRoute, Header } from "./components";
 
 const AppContainer = styled("div")({
@@ -17,24 +17,19 @@ const AppContainer = styled("div")({
 });
 
 function App() {
-  const authUser = useAuthStore((state) => state.currentUser)
-  const setAuthUser = useAuthStore((state) => state.setCurrentUser)
+  const setAuthUser = useAuthStore((state) => state.setCurrentUser);
 
   React.useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
-      
-        setAuthUser(user)
+        setAuthUser(user);
       } else {
-      
-        setAuthUser(null)
+        setAuthUser(null);
       }
     });
 
     return listen;
   }, [setAuthUser]);
-
-  console.log(555, authUser)
 
   return (
     <AppContainer>
@@ -58,6 +53,15 @@ function App() {
           <Route
             path="/sign-up"
             element={<Signup />}
+            errorElement={<ErrorPage />}
+          />
+          <Route
+            path="/box-break/:breakId"
+            element={
+              <ProtectedRoute>
+                <BreakPage />
+              </ProtectedRoute>
+            }
             errorElement={<ErrorPage />}
           />
         </Routes>
