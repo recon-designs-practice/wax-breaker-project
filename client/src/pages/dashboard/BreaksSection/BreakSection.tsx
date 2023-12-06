@@ -6,8 +6,8 @@ import useBreaksStore from "../../../stores/store";
 import { Card, Button } from "../../../components";
 import { Theme } from '@emotion/react'
 
-// const api = "http://localhost:5656/box_breaks";
-const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
+const api = "http://localhost:5656/box_breaks";
+// const api = "https://wax-breaker-db-service.onrender.com/box_breaks";
 
 type SectionProps = {
   theme?: Theme
